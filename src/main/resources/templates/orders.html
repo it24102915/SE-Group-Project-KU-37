@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>My Orders</title>
+  <link rel="stylesheet" th:href="@{/css/orders.css}">
+</head>
+<body>
+<div class="orders-container">
+  <h1>My Orders</h1>
+
+  <div th:if="${orderDetails.isEmpty()}">
+    <p>You have no orders.</p>
+  </div>
+
+  <div th:unless="${orderDetails.isEmpty()}">
+    <table>
+      <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Ordered Items</th>
+        <th>Status</th>
+        <th>Total Price</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="order : ${orderDetails}">
+        <td data-label="Order ID" th:text="${order.id}"></td>
+        <td data-label="Ordered Items">
+          <ul>
+            <li th:each="orderItem : ${order.orderItems}">
+              <span th:text="${orderItem.item.name} + ' (Quantity: ' + ${orderItem.quantity} + ', Price: LKR' + ${#numbers.formatDecimal(orderItem.item.price, 1, 2)} + ')'"></span>
+            </li>
+          </ul>
+        </td>
+        <td data-label="Status" th:class="${order.status == 'PENDING'} ? 'pending'" th:text="${order.status}"></td>
+        <td data-label="Total Price" th:text="'LKR' + ${#numbers.formatDecimal(order.totalPrice, 1, 2)}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <a href="/dashboard">Back to Dashboard</a>
+  <a href="/store">Go to Store</a>
+</div>
+</body>
+</html>

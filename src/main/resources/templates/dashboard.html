@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/dashboard.css"/>
+</head>
+<body>
+<div class = "wrapper">
+    <h1>Welcome, <span th:text="${customer.firstName} + ' ' + ${customer.lastName}"></span></h1>
+
+    <div class = "details">
+        <p>Email: <span th:text="${customer.email}"></span></p>
+        <p>NIC: <span th:text="${customer.nic}"></span></p>
+        <p>DOB: <span th:text="${customer.dob}"></span></p>
+        <p>Gender: <span th:text="${customer.gender}"></span></p>
+        <p>Address: <span th:text="${customer.address}"></span></p>
+        <p>Mobile Number: <span th:text="${customer.phone}"></span></p>
+    </div>
+
+    <div class="button-group">
+        <a href="/store" class="btn">Go to Store Page</a><br/>
+        <a href="/orders" class = "btn">My Orders</a><br/>
+        <form action="/logout" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <button type="submit" class = "btn">Logout</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
