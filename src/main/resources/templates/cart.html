@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Your Cart</title>
+  <link rel="stylesheet" th:href="@{/css/cart.css}">
+</head>
+<body>
+<div class="cart-container">
+  <h1>Your Cart</h1>
+
+  <div th:if="${cartItems.isEmpty()}">
+    <p>Your cart is empty.</p>
+  </div>
+
+  <div th:unless="${cartItems.isEmpty()}">
+    <table>
+      <thead>
+      <tr>
+        <th>Item Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Subtotal</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="cartItem : ${cartItems}">
+        <td th:text="${cartItem.item.name}"></td>
+        <td th:text="${cartItem.quantity}"></td>
+        <td th:text="'LKR' + ${#numbers.formatDecimal(cartItem.item.price, 1, 2)}"></td>
+        <td th:text="'LKR' + ${#numbers.formatDecimal(cartItem.item.price * cartItem.quantity, 1, 2)}"></td>
+      </tr>
+      </tbody>
+    </table>
+
+    <p class="total" th:text="'Total: LKR' + ${#numbers.formatDecimal(totalPrice, 1, 2)}"></p>
+
+    <form action="/order" method="post">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+      <button type="submit">Place Order</button>
+    </form>
+  </div>
+
+  <a href="/store">Back to Store</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Musical Instruments Store</title>
+  <link rel="stylesheet" th:href="@{/css/store.css}">
+</head>
+<body>
+
+<div class="store-container">
+  <h1>Musical Instruments Store</h1>
+
+  <!-- Success and error messages -->
+  <div th:if="${param.error}" th:text="${param.error}" class="error"></div>
+  <div th:if="${param.success}" th:text="${param.success}" class="success"></div>
+
+  <!-- Loop through instrument categories -->
+  <div th:each="entry : ${groupedItems}">
+    <h2 th:text="${entry.key}"></h2>
+    <ul>
+
+      <!-- Loop through items in each category -->
+      <li th:each="item : ${entry.value}">
+
+        <!-- Product image -->
+        <img th:src="@{${item.image}}" alt="Instrument Image" class="item-image">
+
+        <!-- Product info -->
+        <div class="item-info">
+          <span th:text="${item.name}" class="item-name"></span>
+          <span>Stock: <span th:text="${item.quantity}"></span></span>
+          <span>Price: LKR<span th:text="${#numbers.formatDecimal(item.price, 1, 2)}"></span></span>
+        </div>
+
+        <!-- Add to cart form -->
+        <form action="/add-to-cart" method="post">
+          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+          <input type="hidden" name="itemId" th:value="${item.id}" />
+          <input type="number" name="quantity" min="1" th:max="${item.quantity}" value="1" />
+          <button type="submit">Add to Cart</button>
+        </form>
+
+      </li>
+    </ul>
+  </div>
+
+  <!-- Bottom navigation buttons -->
+  <div style="text-align:center; margin-top: 25px;">
+    <a href="/cart">View Cart</a>
+    <a href="/dashboard">Back to Dashboard</a>
+  </div>
+</div>
+
+</body>
+</html>

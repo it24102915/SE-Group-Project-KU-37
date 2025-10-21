@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Error</title>
+</head>
+<body>
+  <h1>Error</h1>
+  <p>Status Code: <span th:text="${#httpServletRequest.getAttribute('javax.servlet.error.status_code')} ?: 'Unknown'"></span></p>
+  <p>Message: <span th:text="${#httpServletRequest.getAttribute('javax.servlet.error.message')} ?: 'An unexpected error occurred'"></span></p>
+  <p>Exception: <span th:text="${#httpServletRequest.getAttribute('javax.servlet.error.exception')?.message} ?: 'No exception details'"></span></p>
+  <p th:if="${param.message}" th:text="${param.message}"></p>
+  <a href="/login">Back to Login</a>
+  <a href="/dashboard">Back to Dashboard</a>
+</body>
+</html>

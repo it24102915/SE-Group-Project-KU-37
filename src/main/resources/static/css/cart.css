@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Philosopher:wght@700&family=Poppins:wght@300;400;500&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Background with gradient */
+body {
+    background-color: #c9d6ff;
+    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Glass effect overlay */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    z-index: 0;
+}
+
+/* Cart container */
+.cart-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 850px;
+    padding: 36px 44px;
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0.15));
+    border: 1px solid rgba(255,255,255,0.35);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    color: #333;
+}
+
+/* Title */
+.cart-container h1 {
+    font-family: "Philosopher", serif;
+    font-weight: 700;
+    font-size: 34px;
+    color: #222;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Empty cart message */
+.cart-container p {
+    font-size: 16px;
+    color: #444;
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Table styles */
+.cart-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.cart-container th,
+.cart-container td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    font-size: 15px;
+}
+
+.cart-container th {
+    background: #0D1936;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Total */
+.cart-container .total {
+    font-weight: bold;
+    font-size: 18px;
+    text-align: right;
+    margin-top: 10px;
+}
+
+/* Buttons */
+button,
+a {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    color: #222;
+    background: linear-gradient(90deg, #ffffff, #e9e9e9);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+    border: none;
+    cursor: pointer;
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+    text-align: center;
+}
+
+/* Space buttons */
+form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+a[href="/store"] {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+}
+
+/* Hover effect */
+button:hover,
+a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.25);
+    background: linear-gradient(90deg, #333, #555);
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .cart-container {
+        padding: 24px;
+    }
+
+    .cart-container h1 {
+        font-size: 26px;
+    }
+
+    .cart-container th,
+    .cart-container td {
+        font-size: 14px;
+    }
+}
